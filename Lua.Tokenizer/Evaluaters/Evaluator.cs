@@ -3,7 +3,7 @@
     public abstract class Evaluator
     {
         public EvaluatorState State { get; set; }
-        public Token Value { get; set; }
+        public Token Value { get; set; } = new Token();
 
         public virtual EvaluatorState Evaluate(CharacterInfo info)
         {

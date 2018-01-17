@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Text;
 
 namespace Lua.Tokenizer.Evaluaters
 {
@@ -13,7 +12,7 @@ namespace Lua.Tokenizer.Evaluaters
         public override EvaluatorState Evaluate(CharacterInfo info)
         {
             base.Evaluate(info);
-            if (TokenData.Keyword.Contains(Value.Source))
+            if (Token.Keywords.Contains(Value.Source))
                 return EvaluatorState.Accepted;
             return EvaluatorState.Running;
         }

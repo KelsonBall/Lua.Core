@@ -1,23 +1,10 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Lua.Tokenizer
 {
-    public static class TokenData
+    public partial class Token
     {
-        public static bool Is(this string c, string[] items) => items.Any(s => s.Contains(c));
-
-        public static bool IsCharOf(this string c, int offset, string[] items) => items.Any(s =>
-        {
-            if (s.Length <= offset)
-                return false;
-            return s[offset].ToString() == c;
-        });
-
-        public static bool IsLastCharOf(this string c, int offset, string[] items) => items.Any(s =>
-        {
-            return c == s.Last().ToString() && offset == s.Length - 1;
-        });
-
         public static readonly string[] StructuralPunctuation = new string[]
         {
             "...", "(", ")", ",", "[", "]", "\"",
@@ -36,14 +23,29 @@ namespace Lua.Tokenizer
             "<", "<=", ">", ">=", "==", "~=", "and", "or",
         };
 
-        public static readonly string[] Keyword = new string[]
+        public static readonly string[] Operators =
+            BinOp
+                .Concat(UnOp)
+                .Distinct()
+                .ToArray();
+
+        public static readonly string[] ReservedWords = new string[]
         {
             "break",     "do",        "else",      "elseif",    "end",
             "for",       "function",  "goto",      "if",        "in",
-            "local",     "repeat",    "return",    "then",      "until",     "while",
+            "local",     "not",     "repeat",    "return",    "then",
+            "until",     "while",   "nil",  "true",     "false",    "and",
+            "or"
         };
 
-        public static readonly string[] Value = new string[]
+        public static readonly string[] Keywords = new string[]
+        {
+            "break",     "do",        "else",      "elseif",    "end",
+            "for",       "function",  "goto",      "if",        "in",
+            "local",    "repeat",    "return",    "then",   "until",     "while",
+        };
+
+        public static readonly string[] Values = new string[]
         {
             "nil", "true", "false"
         };
@@ -55,11 +57,16 @@ namespace Lua.Tokenizer
             StructuralPunctuation
                 .Concat(UnOp)
                 .Concat(BinOp)
-                .Concat(Keyword)
-                .Concat(Value)
+                .Concat(Keywords)
+                .Concat(Values)
                 .ToArray();
 
         public static string Alphabet = "abcdefghijklmnopqrstuvwxyz";
+
+        public static IEnumerable<string> Digits(int numberbase = 10)
+        {
+            return "0123456789ABCDEFGH".Take(numberbase).Select(c => c.ToString());
+        }
 
         public static string[] NonAlphabetLiterals = Literal.Where(l => !l.Any(c => Alphabet.Contains(c))).ToArray();
 

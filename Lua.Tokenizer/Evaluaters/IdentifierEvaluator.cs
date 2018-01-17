@@ -12,10 +12,10 @@ namespace Lua.Tokenizer.Evaluaters
         public override EvaluatorState Evaluate(CharacterInfo info)
         {
             base.Evaluate(info);
-            if (!TokenData.IdentifierCharacters.Contains(info.Value))
+            if (!Token.IdentifierCharacters.Contains(info.Value))
                 return EvaluatorState.Failed;
 
-            if (!TokenData.Keyword.Contains(Value.Source))
+            if (!Token.ReservedWords.Contains(Value.Source))
                 return EvaluatorState.Accepted;
 
             return EvaluatorState.Running;
