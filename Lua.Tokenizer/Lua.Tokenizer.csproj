@@ -8,4 +8,8 @@
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="2.6.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Lua.Common\Lua.Common.csproj" />
+  </ItemGroup>
+
 </Project>

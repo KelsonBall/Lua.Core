@@ -9,6 +9,15 @@ namespace Lua.Tokenizer.Evaluaters
             Value.Type = TokenType.Operator;
         }
 
+        public override Evaluator Copy()
+        {
+            return new OperatorEvaluator
+            {
+                State = State,
+                Value = Value.Copy()
+            };
+        }
+
         public override EvaluatorState Evaluate(CharacterInfo info)
         {
             base.Evaluate(info);

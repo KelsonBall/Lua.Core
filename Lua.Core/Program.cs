@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Lua.Tokenizer;
+using System;
+using System.Linq;
 
 namespace Lua.Core
 {
@@ -6,7 +8,12 @@ namespace Lua.Core
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            while (true)
+            {
+                var source = Console.ReadLine();
+                var token = Token.Parse(CharacterInfo.Parse(source)).ToList();
+                Console.WriteLine(string.Join("", token.Select(t => t.ToString())));
+            }
         }
     }
 }

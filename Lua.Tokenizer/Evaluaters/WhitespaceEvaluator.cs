@@ -9,12 +9,21 @@ namespace Lua.Tokenizer.Evaluaters
             Value.Type = TokenType.Whitespace;
         }
 
+        public override Evaluator Copy()
+        {
+            return new WhitespaceEvaluator
+            {
+                Value = Value.Copy(),
+                State = State
+            };
+        }
+
         public override EvaluatorState Evaluate(CharacterInfo info)
         {
             base.Evaluate(info);
-            if (Value.Source.Any(c => Token.WhitespaceChars.Contains(c)))
-                return EvaluatorState.Failed;
-            return EvaluatorState.Accepted;
+            if (Token.WhitespaceChars.Any(c => c.ToString() == info.Value))
+                return EvaluatorState.Accepted;
+            return EvaluatorState.Failed;
         }
     }
 }

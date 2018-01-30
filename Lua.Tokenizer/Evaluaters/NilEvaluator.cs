@@ -7,6 +7,15 @@
             Value.Type = TokenType.Nil;
         }
 
+        public override Evaluator Copy()
+        {
+            return new NilEvaluator
+            {
+                State = State,
+                Value = Value.Copy()
+            };
+        }
+
         public override EvaluatorState Evaluate(CharacterInfo info)
         {
             base.Evaluate(info);

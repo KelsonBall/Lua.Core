@@ -11,5 +11,7 @@
             Value.Characters.Add(info);
             return State;
         }
+
+        public abstract Evaluator Copy();
     }
 }

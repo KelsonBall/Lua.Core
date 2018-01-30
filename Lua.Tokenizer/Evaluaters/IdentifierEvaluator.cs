@@ -6,7 +6,16 @@ namespace Lua.Tokenizer.Evaluaters
     {
         public IdentifierEvaluator()
         {
-            Value.Type = TokenType.Keyword;
+            Value.Type = TokenType.Identifier;
+        }
+
+        public override Evaluator Copy()
+        {
+            return new IdentifierEvaluator
+            {
+                Value = Value.Copy(),
+                State = State
+            };
         }
 
         public override EvaluatorState Evaluate(CharacterInfo info)
@@ -15,10 +24,10 @@ namespace Lua.Tokenizer.Evaluaters
             if (!Token.IdentifierCharacters.Contains(info.Value))
                 return EvaluatorState.Failed;
 
-            if (!Token.ReservedWords.Contains(Value.Source))
-                return EvaluatorState.Accepted;
+            if (Token.ReservedWords.Contains(Value.Source))
+                return EvaluatorState.Running;
 
-            return EvaluatorState.Running;
+            return EvaluatorState.Accepted;
         }
     }
 }

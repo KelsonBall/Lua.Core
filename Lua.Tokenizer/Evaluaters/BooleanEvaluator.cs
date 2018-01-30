@@ -1,17 +1,15 @@
-﻿using System.Linq;
-
-namespace Lua.Tokenizer.Evaluaters
+﻿namespace Lua.Tokenizer.Evaluaters
 {
-    public class StructuralPunctuationEvaluator : Evaluator
+    public class BooleanEvaluator : Evaluator
     {
-        public StructuralPunctuationEvaluator()
+        public BooleanEvaluator()
         {
-            Value.Type = TokenType.Structural;
+            Value.Type = TokenType.Boolean;
         }
 
         public override Evaluator Copy()
         {
-            return new StructuralPunctuationEvaluator
+            return new BooleanEvaluator
             {
                 State = State,
                 Value = Value.Copy()
@@ -21,9 +19,11 @@ namespace Lua.Tokenizer.Evaluaters
         public override EvaluatorState Evaluate(CharacterInfo info)
         {
             base.Evaluate(info);
-            if (Token.StructuralPunctuation.Contains(Value.Source))
+            if (Value.Source == "false")
                 return EvaluatorState.Accepted;
-            if (Token.StructuralPunctuation.Any(s => s.StartsWith(Value.Source)))
+            if (Value.Source == "true")
+                return EvaluatorState.Accepted;
+            if ("true".StartsWith(Value.Source) || "false".StartsWith(Value.Source))
                 return EvaluatorState.Running;
             return EvaluatorState.Failed;
         }

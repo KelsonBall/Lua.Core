@@ -4,6 +4,20 @@ namespace Lua.Tokenizer.Evaluaters
 {
     public class NumberEvaluator : Evaluator
     {
+        public NumberEvaluator()
+        {
+            Value.Type = TokenType.Number;
+        }
+
+        public override Evaluator Copy()
+        {
+            return new NumberEvaluator
+            {
+                Value = Value.Copy(),
+                State = State
+            };
+        }
+
         public override EvaluatorState Evaluate(CharacterInfo info)
         {
             base.Evaluate(info);
@@ -16,7 +30,7 @@ namespace Lua.Tokenizer.Evaluaters
                     return EvaluatorState.Failed;
                 return EvaluatorState.Running;
             }
-            return EvaluatorState.Accepted;
+            return EvaluatorState.Failed;
         }
     }
 }

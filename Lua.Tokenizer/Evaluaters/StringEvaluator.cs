@@ -15,6 +15,20 @@ namespace Lua.Tokenizer.Evaluaters
             Value.Type = TokenType.String;
         }
 
+        public override Evaluator Copy()
+        {
+            return new StringEvaluator
+            {
+                Value = Value.Copy(),
+                stringStarter = stringStarter,
+                multiCharacterStarterRecieved = multiCharacterStarterRecieved,
+                escaped = escaped,
+                completed = completed,
+                source = new StringBuilder(source.ToString()),
+                State = State
+            };
+        }
+
         public override EvaluatorState Evaluate(CharacterInfo info)
         {
             if (completed)

@@ -18,6 +18,7 @@ namespace Lua.Tokenizer
 
         public static IEnumerable<CharacterInfo> Parse(string source)
         {
+            source = " " + source + " ";
             int row = 0;
             int column = 0;
             for (int offset = 0; offset < source.Length; offset++)
@@ -48,5 +49,7 @@ namespace Lua.Tokenizer
                 Column = 0
             };
         }
+
+        public override string ToString() => Value;
     }
 }
