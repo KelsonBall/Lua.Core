@@ -6,20 +6,6 @@ using System.Linq;
 
 namespace Lua.Tokenizer
 {
-    public enum TokenType
-    {
-        None,
-        Keyword,
-        Whitespace,
-        Identifier,
-        Structural,
-        Operator,
-        String,
-        Number,
-        Boolean,
-        Nil
-    }
-
     public partial class Token
     {
         public TokenType Type { get; set; }
