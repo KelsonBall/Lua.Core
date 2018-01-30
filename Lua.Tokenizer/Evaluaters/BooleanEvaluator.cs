@@ -20,9 +20,15 @@
         {
             base.Evaluate(info);
             if (Value.Source == "false")
+            {
+                Value.Value = false;
                 return EvaluatorState.Accepted;
+            }
             if (Value.Source == "true")
+            {
+                Value.Value = true;
                 return EvaluatorState.Accepted;
+            }
             if ("true".StartsWith(Value.Source) || "false".StartsWith(Value.Source))
                 return EvaluatorState.Running;
             return EvaluatorState.Failed;

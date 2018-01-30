@@ -39,9 +39,9 @@ namespace Lua.Tokenizer.Evaluaters
             {
                 if (info.Value == "'")
                     stringStarter = "'";
-                if (info.Value == "\"")
+                else if (info.Value == "\"")
                     stringStarter = "\"";
-                if (info.Value == "[")
+                else if (info.Value == "[")
                     stringStarter = "[";
                 else
                     return EvaluatorState.Failed;
@@ -102,6 +102,7 @@ namespace Lua.Tokenizer.Evaluaters
                 else if (info.Value == "]")
                 {
                     multiCharacterStarterRecieved = true;
+                    return EvaluatorState.Running;
                 }
                 else
                 {

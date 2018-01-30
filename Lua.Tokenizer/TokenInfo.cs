@@ -7,7 +7,7 @@ namespace Lua.Tokenizer
     {
         public static readonly string[] StructuralPunctuation = new string[]
         {
-            "...", "(", ")", ",", "[", "]", "\"",
+            "...", "(", ")", ",", "[", "]",
             "=", ";", ":", ".",  "::", "{", "}",
             "\\",
         };

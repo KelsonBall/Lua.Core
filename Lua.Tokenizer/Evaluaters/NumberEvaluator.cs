@@ -23,10 +23,16 @@ namespace Lua.Tokenizer.Evaluaters
             base.Evaluate(info);
 
             if (Token.Digits().Contains(info.Value))
+            {
+                if (int.TryParse(Value.Source, out int integer))
+                    Value.Value = integer;
+                else if (double.TryParse(Value.Source, out double floating))
+                    Value.Value = floating;
                 return EvaluatorState.Accepted;
+            }
             else if (info.Value == ".")
             {
-                if (Value.Source.Contains("."))
+                if (Value.Source.Count(c => c == '.') > 1)
                     return EvaluatorState.Failed;
                 return EvaluatorState.Running;
             }

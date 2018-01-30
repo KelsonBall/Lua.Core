@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Lua.Tokenizer;
 using System.Linq;
+using System;
 
 namespace Test.Tokenizer
 {
@@ -18,7 +19,7 @@ namespace Test.Tokenizer
         }
 
         [TestMethod]
-        public void IdentifierTest()
+        public void IdentifierTokenTest()
         {
             string source = "x";
             var token = Token.Parse(CharacterInfo.Parse(source)).Single();
@@ -27,7 +28,69 @@ namespace Test.Tokenizer
         }
 
         [TestMethod]
-        public void FunctionTest()
+        public void BooleanTokenTest()
+        {
+            Assert.IsTrue((bool)Token.Parse(CharacterInfo.Parse("true")).Single().Value);
+            Assert.IsFalse((bool)Token.Parse(CharacterInfo.Parse("false")).Single().Value);
+        }
+
+        [TestMethod]
+        public void NilTokenTest()
+        {
+            var token = Token.Parse(CharacterInfo.Parse("nil")).Single();
+            Assert.AreEqual(token.Source, "nil");
+            Assert.AreEqual(token.Type, TokenType.Nil);
+            Assert.IsNull(token.Value);
+        }
+
+        [TestMethod]
+        public void OperatorTokenTest()
+        {
+            var token = Token.Parse(CharacterInfo.Parse(">=")).Single();
+            Assert.AreEqual(token.Source, ">=");
+            Assert.AreEqual(token.Type, TokenType.Operator);
+        }
+
+        [TestMethod]
+        public void StringTokenTest()
+        {
+            string source = "x = \"data\"";
+            var tokens = Token.Parse(CharacterInfo.Parse(source)).ToArray();
+            var token = tokens.Last();
+            Assert.AreEqual(token.Source, "\"data\"");
+            Assert.AreEqual(token.Value, "data");
+            Assert.AreEqual(token.Type, TokenType.String);
+        }
+
+        [TestMethod]
+        public void StringMultilineTokenTest()
+        {
+            string source =
+@"[[eggs
+bacon]]";
+            var tokens = Token.Parse(CharacterInfo.Parse(source)).ToArray();
+            var token = tokens.Last();
+            Assert.AreEqual(token.Source, source);
+            Assert.AreEqual(token.Value, $"eggs{Environment.NewLine}bacon");
+            Assert.AreEqual(token.Type, TokenType.String);
+        }
+
+        [TestMethod]
+        public void NumberTokenTest()
+        {
+            var token = Token.Parse(CharacterInfo.Parse("12")).Single();
+            Assert.AreEqual(token.Source, "12");
+            Assert.AreEqual(token.Value, 12);
+            Assert.AreEqual(token.Type, TokenType.Number);
+
+            token = Token.Parse(CharacterInfo.Parse("12.34")).Single();
+            Assert.AreEqual(token.Source, "12.34");
+            Assert.AreEqual(token.Value, 12.34);
+            Assert.AreEqual(token.Type, TokenType.Number);
+        }
+
+        [TestMethod]
+        public void FullFunctionTokenTest()
         {
             string source = "function add(x, y) return x + y end";
             var tokens = Token.Parse(CharacterInfo.Parse(source)).ToArray();
