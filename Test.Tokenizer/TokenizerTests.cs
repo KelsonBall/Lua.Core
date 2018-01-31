@@ -11,9 +11,7 @@ namespace Test.Tokenizer
         [TestMethod]
         public void KeywordTokenTest()
         {
-            string source = "function";
-
-            var token = Token.Parse(CharacterInfo.Parse(source)).Single();
+            var token = "function".ToTokens().Single();
             Assert.AreEqual(token.Source, "function");
             Assert.AreEqual(token.Type, TokenType.Keyword);
         }
@@ -21,8 +19,7 @@ namespace Test.Tokenizer
         [TestMethod]
         public void IdentifierTokenTest()
         {
-            string source = "x";
-            var token = Token.Parse(CharacterInfo.Parse(source)).Single();
+            var token = "x".ToTokens().Single();
             Assert.AreEqual(token.Source, "x");
             Assert.AreEqual(token.Type, TokenType.Identifier);
         }
@@ -30,14 +27,14 @@ namespace Test.Tokenizer
         [TestMethod]
         public void BooleanTokenTest()
         {
-            Assert.IsTrue((bool)Token.Parse(CharacterInfo.Parse("true")).Single().Value);
-            Assert.IsFalse((bool)Token.Parse(CharacterInfo.Parse("false")).Single().Value);
+            Assert.IsTrue((bool)"true".ToTokens().Single().Value);
+            Assert.IsFalse((bool)"false".ToTokens().Single().Value);
         }
 
         [TestMethod]
         public void NilTokenTest()
         {
-            var token = Token.Parse(CharacterInfo.Parse("nil")).Single();
+            var token = "nil".ToTokens().Single();
             Assert.AreEqual(token.Source, "nil");
             Assert.AreEqual(token.Type, TokenType.Nil);
             Assert.IsNull(token.Value);
@@ -46,7 +43,7 @@ namespace Test.Tokenizer
         [TestMethod]
         public void OperatorTokenTest()
         {
-            var token = Token.Parse(CharacterInfo.Parse(">=")).Single();
+            var token = ">=".ToTokens().Single();
             Assert.AreEqual(token.Source, ">=");
             Assert.AreEqual(token.Type, TokenType.Operator);
         }
@@ -54,9 +51,7 @@ namespace Test.Tokenizer
         [TestMethod]
         public void StringTokenTest()
         {
-            string source = "x = \"data\"";
-            var tokens = Token.Parse(CharacterInfo.Parse(source)).ToArray();
-            var token = tokens.Last();
+            var token = "\"data\"".ToTokens().Last();
             Assert.AreEqual(token.Source, "\"data\"");
             Assert.AreEqual(token.Value, "data");
             Assert.AreEqual(token.Type, TokenType.String);
@@ -68,7 +63,7 @@ namespace Test.Tokenizer
             string source =
 @"[[eggs
 bacon]]";
-            var tokens = Token.Parse(CharacterInfo.Parse(source)).ToArray();
+            var tokens = source.ToTokens().ToArray();
             var token = tokens.Last();
             Assert.AreEqual(token.Source, source);
             Assert.AreEqual(token.Value, $"eggs{Environment.NewLine}bacon");
@@ -78,12 +73,12 @@ bacon]]";
         [TestMethod]
         public void NumberTokenTest()
         {
-            var token = Token.Parse(CharacterInfo.Parse("12")).Single();
+            var token = "12".ToTokens().Single();
             Assert.AreEqual(token.Source, "12");
             Assert.AreEqual(token.Value, 12);
             Assert.AreEqual(token.Type, TokenType.Number);
 
-            token = Token.Parse(CharacterInfo.Parse("12.34")).Single();
+            token = "12.34".ToTokens().Single();
             Assert.AreEqual(token.Source, "12.34");
             Assert.AreEqual(token.Value, 12.34);
             Assert.AreEqual(token.Type, TokenType.Number);
@@ -93,7 +88,7 @@ bacon]]";
         public void FullFunctionTokenTest()
         {
             string source = "function add(x, y) return x + y end";
-            var tokens = Token.Parse(CharacterInfo.Parse(source)).ToArray();
+            var tokens = source.ToTokens().ToArray();
             Assert.AreEqual(tokens[0].Source, "function");
             Assert.AreEqual(tokens[0].Type, TokenType.Keyword);
             Assert.AreEqual(tokens[1].Source, "add");

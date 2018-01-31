@@ -1,13 +1,15 @@
-﻿namespace Lua.Tokenizer.Evaluaters
+﻿using Lua.Common;
+
+namespace Lua.Tokenizer.Evaluaters
 {
-    public class BooleanEvaluator : Evaluator
+    public class BooleanEvaluator : TokenEvaluator
     {
         public BooleanEvaluator()
         {
             Value.Type = TokenType.Boolean;
         }
 
-        public override Evaluator Copy()
+        public override Evaluator<CharacterInfo, Token> Copy()
         {
             return new BooleanEvaluator
             {

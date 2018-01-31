@@ -1,15 +1,16 @@
-﻿using System.Linq;
+﻿using Lua.Common;
+using System.Linq;
 
 namespace Lua.Tokenizer.Evaluaters
 {
-    public class KeywordEvaluator : Evaluator
+    public class KeywordEvaluator : TokenEvaluator
     {
         public KeywordEvaluator()
         {
             Value.Type = TokenType.Keyword;
         }
 
-        public override Evaluator Copy()
+        public override Evaluator<CharacterInfo, Token> Copy()
         {
             return new KeywordEvaluator
             {

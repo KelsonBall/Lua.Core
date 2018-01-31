@@ -1,15 +1,16 @@
-﻿using System.Linq;
+﻿using Lua.Common;
+using System.Linq;
 
 namespace Lua.Tokenizer.Evaluaters
 {
-    public class StructuralPunctuationEvaluator : Evaluator
+    public class StructuralPunctuationEvaluator : TokenEvaluator
     {
         public StructuralPunctuationEvaluator()
         {
             Value.Type = TokenType.Structural;
         }
 
-        public override Evaluator Copy()
+        public override Evaluator<CharacterInfo, Token> Copy()
         {
             return new StructuralPunctuationEvaluator
             {

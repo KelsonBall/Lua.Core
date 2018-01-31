@@ -1,15 +1,16 @@
-﻿using System.Linq;
+﻿using Lua.Common;
+using System.Linq;
 
 namespace Lua.Tokenizer.Evaluaters
 {
-    public class WhitespaceEvaluator : Evaluator
+    public class WhitespaceEvaluator : TokenEvaluator
     {
         public WhitespaceEvaluator()
         {
             Value.Type = TokenType.Whitespace;
         }
 
-        public override Evaluator Copy()
+        public override Evaluator<CharacterInfo, Token> Copy()
         {
             return new WhitespaceEvaluator
             {

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Lua.Tokenizer
 {
@@ -16,14 +17,14 @@ namespace Lua.Tokenizer
 
         public override bool Equals(object obj) => Value.Equals(obj);
 
-        public static IEnumerable<CharacterInfo> Parse(string source)
+        public static IEnumerable<CharacterInfo> Parse(IEnumerable<char> characters)
         {
-            source = " " + source + " ";
             int row = 0;
             int column = 0;
-            for (int offset = 0; offset < source.Length; offset++)
+            int offset = 0;
+            foreach (var v in characters)
             {
-                char v = source[offset];
+                offset++;
                 yield return new CharacterInfo
                 {
                     Value = v.ToString(),

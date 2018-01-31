@@ -1,8 +1,9 @@
-﻿using System.Text;
+﻿using Lua.Common;
+using System.Text;
 
 namespace Lua.Tokenizer.Evaluaters
 {
-    public class StringEvaluator : Evaluator
+    public class StringEvaluator : TokenEvaluator
     {
         private StringBuilder source = new StringBuilder();
         private string stringStarter;
@@ -15,7 +16,7 @@ namespace Lua.Tokenizer.Evaluaters
             Value.Type = TokenType.String;
         }
 
-        public override Evaluator Copy()
+        public override Evaluator<CharacterInfo, Token> Copy()
         {
             return new StringEvaluator
             {

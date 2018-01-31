@@ -1,15 +1,16 @@
-﻿using System.Linq;
+﻿using Lua.Common;
+using System.Linq;
 
 namespace Lua.Tokenizer.Evaluaters
 {
-    public class OperatorEvaluator : Evaluator
+    public class OperatorEvaluator : TokenEvaluator
     {
         public OperatorEvaluator()
         {
             Value.Type = TokenType.Operator;
         }
 
-        public override Evaluator Copy()
+        public override Evaluator<CharacterInfo, Token> Copy()
         {
             return new OperatorEvaluator
             {

@@ -1,13 +1,15 @@
-﻿namespace Lua.Tokenizer.Evaluaters
+﻿using Lua.Common;
+
+namespace Lua.Tokenizer.Evaluaters
 {
-    public class NilEvaluator : Evaluator
+    public class NilEvaluator : TokenEvaluator
     {
         public NilEvaluator()
         {
             Value.Type = TokenType.Nil;
         }
 
-        public override Evaluator Copy()
+        public override Evaluator<CharacterInfo, Token> Copy()
         {
             return new NilEvaluator
             {
