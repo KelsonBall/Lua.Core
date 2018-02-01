@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lua.AbstractSyntaxTree", "L
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Tokenizer", "Test.Tokenizer\Test.Tokenizer.csproj", "{9F33DF30-5720-45CE-A432-0BC33451A54A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lua.Common", "Lua.Common\Lua.Common.csproj", "{C4CDAE65-15E5-4AEC-95EF-910EB7A02630}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lua.Common", "Lua.Common\Lua.Common.csproj", "{C4CDAE65-15E5-4AEC-95EF-910EB7A02630}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lua.Parser", "Lua.Parser\Lua.Parser.csproj", "{65D4E1DE-887D-4257-9CCB-B7EEAD7CB6C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{C4CDAE65-15E5-4AEC-95EF-910EB7A02630}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4CDAE65-15E5-4AEC-95EF-910EB7A02630}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4CDAE65-15E5-4AEC-95EF-910EB7A02630}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65D4E1DE-887D-4257-9CCB-B7EEAD7CB6C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65D4E1DE-887D-4257-9CCB-B7EEAD7CB6C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65D4E1DE-887D-4257-9CCB-B7EEAD7CB6C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65D4E1DE-887D-4257-9CCB-B7EEAD7CB6C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

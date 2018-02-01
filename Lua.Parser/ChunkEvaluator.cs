@@ -1,0 +1,26 @@
+﻿using Lua.AbstractSyntaxTree;
+using Lua.Common;
+using Lua.Tokenizer;
+using System;
+
+namespace Lua.Parser
+{
+    public class ChunkEvaluator : AstEvaluator
+    {
+        public ChunkEvaluator()
+        {
+            Value = SetMetadata(new Chunk());
+        }
+
+        public override EvaluatorState Evaluate(Token info)
+        {
+            base.Evaluate(info);
+            throw new NotImplementedException();
+        }
+
+        public override Evaluator<Token, AstNode> Copy()
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
